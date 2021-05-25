@@ -1,0 +1,9 @@
+total time taken for sorting:51 Seconds
+Total Data Read: 4 GB
+Total Data Write: 4 GB
+
+
+Records: 42949672
+Checksum: 147a91dd0ea4d36
+Duplicate keys: 0
+SUCCESS - all records are in order

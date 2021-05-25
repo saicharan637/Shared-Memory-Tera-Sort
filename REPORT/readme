@@ -1,0 +1,73 @@
+There is a Java program name MySort.java. It can be used to perform  external data sort and multi-threading for various file sizes whilst limiting the memory to 8GB.
+
+INPUFILE :
+The user can generate the input data set using gensort by using the below command:
+
+./gensort -a no_of_records file_name
+
+Here the user has to give 2 arguments
+
+1. No. of Records - This is the no of records that the gensort will generate and each record is 100 bytes
+2. File Name - Name of the file for the generate ddata 
+
+COMPILATION:
+
+There is makefile included in the program which can be used to compile it. You can use the below command to compile it also:
+We specified the input file, the number of lines and also the number of threads inside the code itself, so please change the name of the input file in the code under "Input_file" and remover the path from 'tempfiles' and 'time' , as the chunks would be created under the default directory
+The number of lines for:
+
+1gb:10737418
+4gb:42949672
+16gb:171798692
+64gb:687194768
+
+The number of lines would not change as we are using gensort only to generate the input files.
+
+make
+
+EXECUTION:
+
+Please use the below command:
+
+javac MySort.java
+java MySort
+
+User can also add a flag with javac to limit the memory size available which is Xmx(memory size). Suppose the user wants to limit the memory size to 8gb, then please add the below commnad:
+
+java -Xmx8g MySort.java
+
+OUTPUT :
+
+The output will contain the following information:
+1. tempfiles:Here all the sorted chunks will be stored and then will be merged together, the name of the file would be sort_file401 since 
+2. execution/Sortlog: here the log will be stored where the sorting time will be displayed 
+
+Please use this command"sudo sysctl -w vm.drop_caches=3" to clear the cache after every sort
+
+The sorted file can be verified using the valsort which comes with gensort using the below command:
+
+./valsort file_name
+
+Valsort will give the number of records and checksum and tell in case the data is not sorted. 
+
+To use Linux sort, below commands can be used:
+
+LC_ALL=C sort --buffer-size=memory --parallel=no_of_threads input_file -o output_file
+
+Here, there are multiple options that can be passed by the user:
+1. Memory - Size of the memory you want sort to use
+2. Parallel - No of threads 
+3. Input File Name
+4. Output File Name
+5. LC_ALL=c forces the system to do sorting bytewise.
+
+Example Query:
+LC_ALL=C sort --buffer-size=8g --parallel=16 input_64.txt -o out_64.txt &
+
+The above command will sort a file named input_64.txt using 8GB of ram and 16 threads and place the output in out_64.txt
+
+
+
+
+
+
